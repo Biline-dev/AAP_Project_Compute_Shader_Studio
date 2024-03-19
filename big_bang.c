@@ -3,8 +3,8 @@
     Module : AAP
     Projet : ComputeShaderStudio
     Présenté par : 
-        OULATA Fatima
-        BOULMAALI Linda Imene
+        Fatima OULATA 
+        Linda Imene BOULMAALI 
 
     Code inspiré de : https://www.shadertoy.com/view/MdXSzS
 
@@ -109,7 +109,8 @@ void main( )
         if(step<400){
             t = step * 0.02 + (( 0.005 * log(step * 0.1))/(length(uv.xy) + 0.07)) * 2.2; //0.005 c'est ce qui affiche l'absorbation grande 
             si = cos(t);
-            co = abs(t);
+            ab = abs(t);
+            ma = mat2(ab, si, -si, ab);
                 
         }else{
             // STEP: GALAXY
@@ -117,9 +118,10 @@ void main( )
             t = step * 0.01 + ((0.25 + 0.005 *log(step * 0.09))/(length(uv.xy) + 0.07)) * 2.2; //0.1 pour la rapidité
             si =sin(t);
             co = cos(t);  
+            ma = mat2(co, si, -si, co);
 
         }
-        ma = mat2(co, si, -si, co);
+        
         for (int i = 0; i < 90; i++){
             vec3 p = s * vec3(uv, 0.0);
             p.xy *= ma;
